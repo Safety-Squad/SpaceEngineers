@@ -11,7 +11,8 @@
 *.sln.docstates
 
 **/MDK/
-
+*.sln
+*.csproj
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)
