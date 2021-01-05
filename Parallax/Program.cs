@@ -42,14 +42,18 @@ namespace IngameScript
         //
         // to learn more about ingame scripts.
 
-        public Program()
+        public Program() //Executes once when the Program is loaded.
         {
+            //This code only needs to execute once, so it will run when the Program is loaded and then die.
+
             //get angle
             var advancedrotor = GridTerminalSystem.GetBlockWithName("Advanced Rotor") as IMyMotorAdvancedStator;
             float angle = advancedrotor.Angle;
             //Echo(angle.ToString()); //DEBUG
 
             //use tangent and 100m to find the distance from the fixed Camera distance
+            float distance = 100 * Math.Tan(angle);
+            Echo(distance.ToString());
 
             //Display value to a Display Screen after a button is pushed.
 
