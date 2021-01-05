@@ -44,18 +44,15 @@ namespace IngameScript
 
         public Program()
         {
-            // The constructor, called only once every session and
-            // always before any other method is called. Use it to
-            // initialize your script. 
-            //     
-            // The constructor is optional and can be removed if not
-            // needed.
-            // 
-            // It's recommended to set Runtime.UpdateFrequency 
-            // here, which will allow your script to run itself without a 
-            // timer block.
+
 
             //get angle
+            var advancedrotor = GridTerminalSystem.GetBlockWithName("Advanced Rotor") as IMyMotorAdvancedStator;
+
+            float angle = advancedrotor.Angle;
+            //double rotorAng = new Convert.ToDouble((advancedrotor.DetailedInfo.Remove(0, 15)).TrimEnd('°'));
+            Echo(rotorAng.ToString());
+
         }
 
         public void Save()
