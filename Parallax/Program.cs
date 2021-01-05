@@ -52,11 +52,13 @@ namespace IngameScript
             //Echo(angle.ToString()); //DEBUG
 
             //use tangent and 100m to find the distance from the fixed Camera distance
-            float distance = 100 * Math.Tan(angle);
-            Echo(distance.ToString());
+            float distance = (float)(100 * Math.Tan(angle));
+            //Echo(distance.ToString()); //DEBUG
 
             //Display value to a Display Screen after a button is pushed.
-
+            IMyTextPanel panel = GridTerminalSystem.GetBlockWithName("LCD Panel") as IMyTextPanel;
+            String output = distance.ToString() + " m";
+            panel.WritePublicText(output);
         }
 
         public void Save()
