@@ -44,14 +44,14 @@ namespace IngameScript
 
         public Program()
         {
-
-
             //get angle
             var advancedrotor = GridTerminalSystem.GetBlockWithName("Advanced Rotor") as IMyMotorAdvancedStator;
-
             float angle = advancedrotor.Angle;
-            //double rotorAng = new Convert.ToDouble((advancedrotor.DetailedInfo.Remove(0, 15)).TrimEnd('°'));
-            Echo(rotorAng.ToString());
+            //Echo(angle.ToString()); //DEBUG
+
+            //use tangent and 100m to find the distance from the fixed Camera distance
+
+            //Display value to a Display Screen after a button is pushed.
 
         }
 
