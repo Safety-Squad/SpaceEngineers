@@ -45,7 +45,7 @@ namespace IngameScript
         public Program() //Executes once when the Program is loaded.
         {
             //This code only needs to execute once, so it will run when the Program is loaded and then die.
-
+            /*
             //get angle
             var advancedrotor = GridTerminalSystem.GetBlockWithName("Advanced Rotor") as IMyMotorAdvancedStator;
             float angle = advancedrotor.Angle;
@@ -59,6 +59,8 @@ namespace IngameScript
             IMyTextPanel panel = GridTerminalSystem.GetBlockWithName("LCD Panel") as IMyTextPanel;
             String output = distance.ToString() + " m";
             panel.WritePublicText(output);
+            */
+            Runtime.UpdateFrequency = UpdateFrequency.Once | UpdateFrequency.Update100;
         }
 
         public void Save()
@@ -82,6 +84,14 @@ namespace IngameScript
             // 
             // The method itself is required, but the arguments above
             // can be removed if not needed.
+
+            var advancedrotor = GridTerminalSystem.GetBlockWithName("Advanced Rotor") as IMyMotorAdvancedStator;
+            float angle = advancedrotor.Angle;
+            float distance = (float)(100 * Math.Tan(angle));
+            IMyTextPanel panel = GridTerminalSystem.GetBlockWithName("LCD Panel") as IMyTextPanel;
+            String output = distance.ToString() + " m";
+            panel.WriteText(output);
         }
+    
     }
 }
