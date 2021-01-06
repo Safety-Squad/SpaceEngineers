@@ -42,28 +42,30 @@ namespace IngameScript
         //
         // to learn more about ingame scripts.
 
-        public Program() //Executes once when the Program is loaded.
+        public Program()
         {
-            //This code only needs to execute once, so it will run when the Program is loaded and then die.
-            /*
-            //get angle
-            var advancedrotor = GridTerminalSystem.GetBlockWithName("Advanced Rotor") as IMyMotorAdvancedStator;
-            float angle = advancedrotor.Angle;
-            //Echo(angle.ToString()); //DEBUG
-
-            //use tangent and 100m to find the distance from the fixed Camera distance
-            float distance = (float)(100 * Math.Tan(angle));
-            //Echo(distance.ToString()); //DEBUG
-
-            //Display value to a Display Screen after a button is pushed.
-            IMyTextPanel panel = GridTerminalSystem.GetBlockWithName("LCD Panel") as IMyTextPanel;
-            String output = distance.ToString() + " m";
-            panel.WritePublicText(output);
-            */
-            Runtime.UpdateFrequency = UpdateFrequency.Once | UpdateFrequency.Update100;
+            // The constructor, called only once every session and
+            // always before any other method is called. Use it to
+            // initialize your script. 
+            //     
+            // The constructor is optional and can be removed if not
+            // needed.
+            // 
+            // It's recommended to set Runtime.UpdateFrequency 
+            // here, which will allow your script to run itself without a 
+            // timer block.
         }
 
-     
+        public void Save()
+        {
+            // Called when the program needs to save its state. Use
+            // this method to save your state to the Storage field
+            // or some other means. 
+            // 
+            // This method is optional and can be removed if not
+            // needed.
+        }
+
         public void Main(string argument, UpdateType updateSource)
         {
             // The main entry point of the script, invoked every time
@@ -75,14 +77,6 @@ namespace IngameScript
             // 
             // The method itself is required, but the arguments above
             // can be removed if not needed.
-
-            var advancedrotor = GridTerminalSystem.GetBlockWithName("Advanced Rotor") as IMyMotorAdvancedStator;
-            float angle = advancedrotor.Angle;
-            float distance = (float)(100 * Math.Tan(angle));
-            IMyTextPanel panel = GridTerminalSystem.GetBlockWithName("LCD Panel") as IMyTextPanel;
-            String output = distance.ToString() + " m";
-            panel.WriteText(output);
         }
-    
     }
 }
