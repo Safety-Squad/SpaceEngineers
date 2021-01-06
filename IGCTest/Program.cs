@@ -42,41 +42,59 @@ namespace IngameScript
         //
         // to learn more about ingame scripts.
 
+        int _runcount = 0;
+        string _broadCastTag = "MDK IGC EXAMPLE 1";
+        IMyBroadcastListener _myBroadcastListener;
+
         public Program()
         {
-            // The constructor, called only once every session and
-            // always before any other method is called. Use it to
-            // initialize your script. 
-            //     
-            // The constructor is optional and can be removed if not
-            // needed.
-            // 
-            // It's recommended to set Runtime.UpdateFrequency 
-            // here, which will allow your script to run itself without a 
-            // timer block.
-        }
-
-        public void Save()
-        {
-            // Called when the program needs to save its state. Use
-            // this method to save your state to the Storage field
-            // or some other means. 
-            // 
-            // This method is optional and can be removed if not
-            // needed.
+            Echo("Creator");
+            _myBroadcastListener = IGC.RegisterBroadcastListener(_broadCastTag);
+            _myBroadcastListener.SetMessageCallback(_broadCastTag);
         }
 
         public void Main(string argument, UpdateType updateSource)
         {
-            // The main entry point of the script, invoked every time
-            // one of the programmable block's Run actions are invoked,
-            // or the script updates itself. The updateSource argument
-            // describes where the update came from. Be aware that the
-            // updateSource is a  bitfield  and might contain more than 
-            // one update type.
-            // 
-            // The method itself is required, but the arguments above
-            // can be removed if not needed.
+            _runcount++;
+            Echo(_runcount.ToString() + ":" + updateSource.ToString());
+
+            if (
+                (updateSource & (UpdateType.Trigger | UpdateType.Terminal)) > 0
+                || (updateSource & (UpdateType.Mod)) > 0
+                || (updateSource & (UpdateType.Script)) > 0
+                )
+            {
+                if (argument != "")
+                {
+                    IGC.SendBroadcastMessage(_broadCastTag, argument);
+                    Echo("Sending message:\n" + argument);
+                }
+            }
+
+            if ((updateSource & UpdateType.IGC) > 0)
+            {
+                while (_myBroadcastListener.HasPendingMessage)
+                {
+                    MyIGCMessage myIGCMessage = _myBroadcastListener.AcceptMessage();
+                    if (myIGCMessage.Tag == _broadCastTag)
+                    { // This is our tag
+                        if (myIGCMessage.Data is string)
+                        {
+                            string str = myIGCMessage.Data.ToString();
+                            Echo("Received IGC Public Message");
+                            Echo("Tag=" + myIGCMessage.Tag);
+                            Echo("Data=" + myIGCMessage.Data.ToString());
+                            Echo("Source=" + myIGCMessage.Source.ToString("X"));
+                        }
+                        else // if(msg.Data is XXX)
+                        {
+                        }
+                    }
+                    else
+                    {
+                    }
+                }
+            }
         }
     }
 }
