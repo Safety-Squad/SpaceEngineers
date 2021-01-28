@@ -136,6 +136,7 @@ namespace IngameScript
 
                     // We have our distance 
                     Speed = Distance / TimeDelta;
+                    Speed = Math.Round(Convert.ToDouble(Speed), 4);
                 }
 
                 // Speed|Time|X,Y,Z 

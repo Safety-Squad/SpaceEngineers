@@ -14,10 +14,8 @@
 *.sln
 *.csproj
 
-
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-*/Program.cs
 
 # Mono auto generated files
 mono_crash.*
