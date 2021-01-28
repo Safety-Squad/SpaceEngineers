@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerranLaunch", "TerranLaunch.csproj", "{68FC04A6-E223-4B65-9ED8-868A23607B12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68FC04A6-E223-4B65-9ED8-868A23607B12}.Debug|x64.ActiveCfg = Debug|x64
+		{68FC04A6-E223-4B65-9ED8-868A23607B12}.Debug|x64.Build.0 = Debug|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B0A78CBA-5D9E-41E5-A823-2C406F6C9FA3}
+	EndGlobalSection
+EndGlobal
