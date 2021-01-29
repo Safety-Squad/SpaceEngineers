@@ -54,6 +54,7 @@ namespace IngameScript
             // It's recommended to set Runtime.UpdateFrequency 
             // here, which will allow your script to run itself without a 
             // timer block.
+            Runtime.UpdateFrequency = UpdateFrequency.Update10;
         }
 
         public void Save()
@@ -67,12 +68,25 @@ namespace IngameScript
         }
 
         void Main()
+
+            //DIRECTIONS FOR USE
+            //label hydrogen thrusters as UpThrust
+            //create a remote control called "RC IceJumper to GLS"
+            //create a timer called "Timer Stop Ascent"
+            //which triggers the remote control's inertial dampeners
         {
             // Get blocks 
             var blocks = new List<IMyTerminalBlock>();
 
             // Get the antenna 
             GridTerminalSystem.GetBlocksOfType<IMyRadioAntenna>(blocks);
+
+            IMyTimerBlock timerUp = GridTerminalSystem.GetBlockWithName("Timer Stop Ascent") as IMyTimerBlock;
+
+            IMyRemoteControl remote = GridTerminalSystem.GetBlockWithName("RC IceJumper to GLS") as IMyRemoteControl;
+            
+            Vector3D gravityVector = remote.GetNaturalGravity();
+            float gravity = (float)(gravityVector.Length() / 9.81);
 
             if (blocks.Count > 0)
             {
@@ -137,7 +151,37 @@ namespace IngameScript
                     // We have our distance 
                     Speed = Distance / TimeDelta;
                     Speed = Math.Round(Convert.ToDouble(Speed), 4);
+
+                    double SpeedLimit = 95;
+                    List<IMyTerminalBlock> thrusters = new List<IMyTerminalBlock>();
+
+                    GridTerminalSystem.GetBlockGroupWithName("UpThrust").GetBlocksOfType<IMyTerminalBlock>(thrusters);
+                    var factor = 0.0f;
+                    if (gravity == 0)
+                    {
+                        //trigger timer to turn on inertial dampeners
+                        timerUp.Trigger();
+                    }
+                    else if (Speed < SpeedLimit)
+                    {
+                        factor = 0.9f;
+                    }
+
+                    for (int i = 0; i < thrusters.Count; i++)
+                    {
+                        IMyThrust thruster = thrusters[i] as IMyThrust;
+
+                        var min = thruster.GetMinimum<float>("Override");
+                        var max = thruster.GetMaximum<float>("Override");
+
+                        thruster.SetValueFloat("Override", min + ((max - min) * factor));
+                        Echo("Speed: "+ Speed.ToString());
+                        Echo("Thrust Ratio: " + factor.ToString());
+                        Echo("Gravity: " + gravity.ToString());
+                    }
                 }
+
+            
 
                 // Speed|Time|X,Y,Z 
                 String NewName = Speed.ToString() + "|" +
