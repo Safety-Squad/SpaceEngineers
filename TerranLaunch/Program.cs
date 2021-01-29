@@ -51,7 +51,7 @@ namespace IngameScript
             // The constructor is optional and can be removed if not
             // needed.
             // 
-            // It's recommended to set Runtime.UpdateFrequency 
+            // It's recommended to set Runtime.UpdateFrequency
             // here, which will allow your script to run itself without a 
             // timer block.
             Runtime.UpdateFrequency = UpdateFrequency.Update10;
@@ -164,7 +164,7 @@ namespace IngameScript
                     }
                     else if (Speed < SpeedLimit)
                     {
-                        factor = 0.9f;
+                        factor = 0.99f;
                     }
 
                     for (int i = 0; i < thrusters.Count; i++)
