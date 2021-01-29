@@ -152,7 +152,7 @@ namespace IngameScript
                     Speed = Distance / TimeDelta;
                     Speed = Math.Round(Convert.ToDouble(Speed), 4);
 
-                    double SpeedLimit = 95;
+                    double SpeedLimit = 96;
                     List<IMyTerminalBlock> thrusters = new List<IMyTerminalBlock>();
 
                     GridTerminalSystem.GetBlockGroupWithName("UpThrust").GetBlocksOfType<IMyTerminalBlock>(thrusters);
