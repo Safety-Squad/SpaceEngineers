@@ -71,7 +71,7 @@ namespace IngameScript
 
             //DIRECTIONS FOR USE
             //label hydrogen thrusters as UpThrust
-            //create a remote control called "RC IceJumper to GLS"
+            //create a remote control called "RC IceJumper Roof"
             //create a timer called "Timer Stop Ascent"
             //which triggers the remote control's inertial dampeners
         {
@@ -83,7 +83,7 @@ namespace IngameScript
 
             IMyTimerBlock timerUp = GridTerminalSystem.GetBlockWithName("Timer Stop Ascent") as IMyTimerBlock;
 
-            IMyRemoteControl remote = GridTerminalSystem.GetBlockWithName("RC IceJumper to GLS") as IMyRemoteControl;
+            IMyRemoteControl remote = GridTerminalSystem.GetBlockWithName("RC IceJumper Roof") as IMyRemoteControl;
             
             Vector3D gravityVector = remote.GetNaturalGravity();
             float gravity = (float)(gravityVector.Length() / 9.81);
